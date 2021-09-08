@@ -1,0 +1,97 @@
+$danger: #f0f0f0;
+
+:root {
+  --theme-name: "light";
+  --color-primary: hsl(220, 90%, 56%);
+  --color-primary-h: 220;
+  --color-primary-s: 90%;
+  --color-primary-l: 56%;
+  --color-bg: hsl(0, 0%, 100%);
+  --color-bg-h: 0;
+  --color-bg-s: 0%;
+  --color-bg-l: 100%;
+  --color-contrast-lower: hsl(0, 0%, 95%);
+  --color-contrast-lower-h: 0;
+  --color-contrast-lower-s: 0%;
+  --color-contrast-lower-l: 95%;
+  --color-contrast-low: hsl(240, 1%, 83%);
+  --color-contrast-low-h: 240;
+  --color-contrast-low-s: 1%;
+  --color-contrast-low-l: 83%;
+  --color-contrast-medium: hsl(240, 1%, 48%);
+  --color-contrast-medium-h: 240;
+  --color-contrast-medium-s: 1%;
+  --color-contrast-medium-l: 48%;
+  --color-contrast-high: hsl(240, 4%, 20%);
+  --color-contrast-high-h: 240;
+  --color-contrast-high-s: 4%;
+  --color-contrast-high-l: 20%;
+  --color-contrast-higher: hsl(240, 8%, 12%);
+  --color-contrast-higher-h: 240;
+  --color-contrast-higher-s: 8%;
+  --color-contrast-higher-l: 12%;
+  --chroma-line-numbers-background: #ffffcc;
+  --chroma-line-numbers-color: #7f7f7f;
+  --chroma-keyword-color: #006699;
+  --chroma-name-color: #9999ff;
+  --chroma-attribute-color: #330099;
+  --chroma-literal-color: #cc3300;
+  --chroma-number-color: #ff6600;
+  --chroma-comment-color: #0099ff;
+  --chroma-deleted-color: #ffcccc;
+  --chroma-output-color: #aaaaaa;
+
+  --text-wdth: 90;
+  --text-opsz: 40;
+  --text-YTLC: 460;
+}
+:root[data-theme="dark"] {
+  --theme-name: "dark";
+  --color-primary: hsl(201, 65%, 62%);
+  --color-primary-h: 201;
+  --color-primary-s: 65%;
+  --color-primary-l: 62%;
+  --color-bg: hsl(231, 14%, 10%);
+  --color-bg-h: 231;
+  --color-bg-s: 14%;
+  --color-bg-l: 10%;
+  --color-contrast-lower: hsl(230, 12%, 18%);
+  --color-contrast-lower-h: 230;
+  --color-contrast-lower-s: 12%;
+  --color-contrast-lower-l: 18%;
+  --color-contrast-low: hsl(240, 2%, 37%);
+  --color-contrast-low-h: 240;
+  --color-contrast-low-s: 2%;
+  --color-contrast-low-l: 37%;
+  --color-contrast-medium: hsl(80, 2%, 69%);
+  --color-contrast-medium-h: 80;
+  --color-contrast-medium-s: 2%;
+  --color-contrast-medium-l: 69%;
+  --color-contrast-high: hsl(69, 9%, 84%);
+  --color-contrast-high-h: 69;
+  --color-contrast-high-s: 9%;
+  --color-contrast-high-l: 84%;
+  --color-contrast-higher: hsl(60, 6%, 90%);
+  --color-contrast-higher-h: 60;
+  --color-contrast-higher-s: 6%;
+  --color-contrast-higher-l: 90%;
+  --chroma-line-numbers-background: #ffffcc;
+  --chroma-line-numbers-color: #7f7f7f;
+  --chroma-keyword-color: #ff79c6;
+  --chroma-name-color: #8be9fd;
+  --chroma-attribute-color: #50fa7b;
+  --chroma-literal-color: #f1fa8c;
+  --chroma-number-color: #bd93f9;
+  --chroma-comment-color: #6272a4;
+  --chroma-deleted-color: #8b080b;
+  --chroma-output-color: #44475a;
+
+  .theme-icon-light {
+    display: none !important;
+  }
+
+  .theme-icon-dark {
+    display: inline-block !important;
+    opacity: 0.75;
+  }
+}

@@ -1,11 +1,103 @@
+
 .head{
     width: 100%;
-    height: 90px;
-    background-color: aquamarine;
+    height: 67px;
+    position: relative;
+    z-index: 10;
 }
-.head-cont{
-    width: 80%;
+.lbg{
+    background-image: linear-gradient(to right, #fff1eb 0%, #ace0f9 100%);
+}
+.dbg{
+    background-image: linear-gradient(to right, #29323c 0%, #485563 100%);
+}
+.headCont{
+    width: 90%;
+    height: 67px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    p.title{
+        font-size: 32px;
+        color: var(--color-primary);
+    }
+    .right{
+        width: 20px;
+        span{
+            width: 16px;
+            height: 1px;
+            display: block;
+            background:var(--color-primary);
+            margin-bottom: 4px;
+        }
+    }
+}
+
+.head .popups{
+    width: 100%;
+    position: relative;
+    z-index: 9;
+    ul{
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        justify-items: center;
+        width: 80%;
+        margin: 0 auto;
+        a{
+            text-decoration: none;
+            color:var(--color-primary);
+        }
+        li{
+            height: 75px;
+            font-size: 12px;
+            text-align: center;
+            color: var(--color-primary);
+            img{
+                width: 24px;
+                height: 24px;
+                display: block;
+                margin-bottom: 5px;
+            }
+        }
+    }
+}
+.open{
+    animation: open .6s ease-out;
+    visibility: visible !important;
+}
+.hidden{
+    animation: hidden .6s;
+    visibility: hidden !important;
+}
+
+@keyframes open {
+    from {height:0px;}
+    to {height:150px;}
+    // from {transform: translateY(-20%);opacity: 0;}
+    // to {transform: translateY(0);opacity: 1;}
+}
+@keyframes hidden {
+    from {height:150px;}
+    to {height:0;}
+}
+@keyframes open1 {
+    from {transform: translateY(-20%);opacity: 0;}
+    to {transform: translateY(0);opacity: 1;}
+}
+.open1{
+    animation: open1 .6s ease-out;
+    visibility: visible !important;
+}
+
+
+.mask{
+    width: 100%;
+    height: 100vh;
+    background: var(--color-bg);
+    opacity: 0.9;
+    position: absolute;
+    top: 0;
+    left: 0;
 }

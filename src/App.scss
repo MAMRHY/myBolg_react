@@ -1,0 +1,22 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --color-primary: #333;
+    --color-bg: hsl(0, 0%, 100%);
+    --color-dot: linear-gradient(to right, #fff1eb 0%, #ace0f9 100%);
+}
+
+:root[data-theme='dark'] {
+    --color-primary: white;
+    --color-bg: hsl(231, 14%, 10%);
+    --color-dot: linear-gradient(to right, #29323c 0%, #485563 100%);
+}
+
+body {
+    background: var(--color-bg);
+}
+
+// @import './assets//styles/theme.scss'

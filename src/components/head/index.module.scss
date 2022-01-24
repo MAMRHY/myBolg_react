@@ -23,6 +23,9 @@
         color: var(--color-primary);
     }
     .right{
+        @media screen and (min-width: 414px) {
+            display: none;
+        }
         width: 20px;
         span{
             width: 16px;
@@ -35,33 +38,62 @@
 }
 
 .head .popups{
-    width: 100%;
-    position: relative;
-    z-index: 9;
-    ul{
-        list-style: none;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        justify-items: center;
-        width: 80%;
-        margin: 0 auto;
-        a{
-            text-decoration: none;
-            color:var(--color-primary);
-        }
-        li{
-            height: 75px;
-            font-size: 12px;
-            text-align: center;
-            color: var(--color-primary);
-            img{
-                width: 24px;
-                height: 24px;
-                display: block;
-                margin-bottom: 5px;
+    @media screen and (max-width: 411px) {
+        width: 100%;
+        position: relative;
+        z-index: 9;
+        ul{
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            justify-items: center;
+            width: 80%;
+            margin: 0 auto;
+            a{
+                text-decoration: none;
+                color:var(--color-primary);
+                text-decoration: none !important;
+            }
+            li{
+                height: 75px;
+                font-size: 12px;
+                text-align: center;
+                color: var(--color-primary);
+                img{
+                    width: 24px;
+                    height: 24px;
+                    display: block;
+                    margin-bottom: 5px;
+                }
             }
         }
     }
+    @media screen and (min-width: 412px) {
+        ul{
+            list-style: none;
+            visibility: visible !important;
+            display: flex;
+            position: absolute;
+            top: 10px;
+            right: 50px;
+            a{
+                text-decoration: none;
+                color:var(--color-primary);
+                text-decoration: none !important;
+            }
+            li{
+                width: 65px;
+                color: var(--color-primary);
+                img{
+                    width: 24px;
+                    height: 24px;
+                    display: block;
+                    margin-bottom: 5px;
+                }
+            }
+        }
+    }
+    
 }
 .open{
     animation: open .6s ease-out;

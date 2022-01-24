@@ -23,7 +23,11 @@ export default function Head(){
       });
 
     function handleClick(){
-        setShow(!show)
+        // console.log(window.innerWidth)
+        if(window.innerWidth <= 414){
+            setShow(!show)
+        }
+      
     }
     function changeTheme(){
         let currentTheme = theme==='light'?'dark':'light'

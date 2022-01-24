@@ -23,7 +23,7 @@ export default function Head(){
       });
 
     function handleClick(){
-        // console.log(window.innerWidth)
+        // console.log(window.innerWidth) 获取浏览器窗口大小
         if(window.innerWidth <= 414){
             setShow(!show)
         }

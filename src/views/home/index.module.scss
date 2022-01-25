@@ -13,3 +13,50 @@
     color: #999;
     z-index: -1;
 }
+
+// 弹出框-登录-移动端
+.mask{
+    width: 100%;
+    height: 100vh;
+    background: #333;
+    opacity: .5;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.popup{
+    width: 100%;
+    height: 30vh;
+    background: white;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-bottom: 1px solid #eee;
+    .top{
+        display: flex;
+        justify-content: space-between;
+        p{
+            line-height: 42px;
+            font-size: 14px;
+            width: 80px;
+            text-align: center;
+            margin-bottom: 0;
+        }
+    }
+    .content{
+        padding: 20px 40px;
+        p{
+            padding: 10px;
+            span{
+                width: 50px;
+                text-align: right;
+                padding-right: 10px;
+            }
+            input{
+                width: 200px;
+                padding-left: 10px;
+                border-bottom: 1px solid #999 ;
+            }
+        }
+    }
+}

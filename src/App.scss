@@ -20,4 +20,16 @@ body {
     background: var(--color-bg);
 }
 
+input{
+    background:none;  
+	outline:none;  
+	border:none;
+}
+
+ul{
+    padding:0;
+    margin:0;
+    list-style:none
+}
+
 // @import './assets//styles/theme.scss'

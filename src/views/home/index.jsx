@@ -1,7 +1,11 @@
 import style from './index.module.scss';
-import React from 'react';
-import { Form, Input, Modal } from 'antd';
+import React, { useEffect } from 'react';
+import { Form, Input, Modal, message } from 'antd';
 // import { QuestionCircleOutlined } from '@ant-design/icons';
+import {loginApi, registerApi} from '../../server/users'
+import {setToken, getToken, isLogin} from '../../utils/auth'
+
+const loginFormRef = React.createRef()
 
 export default function Home(){
     const [visible, setVisible] = React.useState(false);
@@ -9,9 +13,18 @@ export default function Home(){
     // const [confirmLoading, setConfirmLoading] = React.useState(false);
 
     const [htmlText, setHtmlText] = React.useState('登录')  //默认是登录，登录之后是用户名
-    const [username, setUName] = React.useState('')
-    const [password, setPsw] = React.useState('')
+    const [username, setUName] = React.useState('')   //移动端的值
+    const [password, setPsw] = React.useState('')  //移动端的值
 
+    useEffect(()=>{
+        // 判断有没登陆
+        console.log(1111);
+        if(isLogin()){
+            console.log(getToken('token'));
+            const name = getToken('token').name
+            setHtmlText(`欢迎回来，${name}`)  
+        }
+    },[])
   
     const openLogin = ()=>{
         // 判断在pc还是移动端
@@ -21,9 +34,54 @@ export default function Home(){
             setVisible(true)
         }
     }
-    const handleOk = ()=>{
-
+    const empty = ()=>{}
+    const handleOk = ()=>{  
+        let name,psw;
+        if(window.innerWidth <= 414){
+            name = username
+            psw = password
+        }else{
+            name = loginFormRef.current.getFieldsValue()['username']
+            psw = loginFormRef.current.getFieldsValue()['password']
+        }
+        if(name === '' && psw === ''){
+            message.warning('请输入昵称和密码！')
+            return
+        }
+        loginApi(name,psw).then(res=>{
+            console.log(res);
+            if(res.code === 200){
+                setHtmlText(`欢迎回来，${res.name}`)
+                setToken({id:res.id,name: res.name})
+                message.success('登录成功！')
+                setVisible(false) 
+                // 移动端的
+                setFormVisible(false)
+                setUName('')
+                setPsw('')
+            }else{
+                setToken('')
+                message.error(`登录失败，${res.message}`)
+            }
+        })
     }
+
+    const addUser = ()=>{
+
+        if(username === '' && password === ''){
+            message.warning('请输入昵称和密码！')
+            return
+        }
+        registerApi(username, password).then(res=>{
+            if(res.code === 200){
+                message.success('注册成功，快去登录吧！')
+            }else{
+                setToken('')
+                message.error('注册失败，请稍后再试')
+            }
+        })
+    }
+    
   
  
 
@@ -36,7 +94,7 @@ export default function Home(){
                 <p>却更渴望黑洞的吞噬</p>
                 <p>因为好奇心，想看看黑暗中有什么</p>
                 <p>(・ˍ・)</p>
-                <p onClick={htmlText=='登录'?openLogin:''} style={{cursor: 'pointer'}}>{htmlText}</p>
+                <p onClick={htmlText==='登录'?openLogin: empty} style={{cursor: 'pointer'}}>{htmlText}</p>
             </div>
             <div className={style.footer}>
                 <p>©2019 - 2021 | yangchuting</p>
@@ -46,7 +104,8 @@ export default function Home(){
             <div className={style.popup}  style={{display:formVisible?'':'none'}}>
                 <div className={style.top}>
                     <p onClick={()=>setFormVisible(false)} >取消</p>
-                    <p style={{color: '#4190f7'}}>登录</p>
+                    <p style={{color: '#4190f7'}} onClick={addUser}>注册</p>
+                    <p style={{color: '#4190f7'}} onClick={handleOk}>登录</p>
                 </div>
                 <div className={style.content}>
                     <form name='iphone_login_form'>
@@ -64,7 +123,8 @@ export default function Home(){
                 onCancel={()=>setVisible(false)}
             >
                <Form
-                name="basic"
+                name="loginForm"
+                ref={loginFormRef}
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 16 }}
                 >
@@ -84,6 +144,7 @@ export default function Home(){
                         <Input.Password />
                     </Form.Item>
                 </Form>
+                <p className='tip'>如果没有账号，则默认注册为新账号！</p>
             </Modal>
             
         </div>

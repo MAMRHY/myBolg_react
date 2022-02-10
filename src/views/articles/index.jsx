@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
-import { getArticleInfoApi } from "../../server/articles"
-import { Result, Comment, Avatar, Form, Button, List, Input ,Tooltip } from 'antd';
+import { getArticleInfoApi, addDiscussApi, getDiscussListApi } from "../../server/articles"
+import { Result, Comment, Avatar, Form, Button, List, Input ,Tooltip, message } from 'antd';
 import style from './index.module.scss';
 import ReactMarkdown from 'react-markdown'
+
+// TODO 2.完成图片上传 3.完成评论逻辑 4.展示标签
 
 import moment from 'moment';
 
@@ -33,8 +35,8 @@ export default function Articles({match},props){
     const [info, setInfo] = useState({})
     const [errshow, setShow] = useState(false)
     const [comments,setComments] = useState([])
-    const [submitting,setSubmitting] = useState(false)
-    const [value,setValue] = useState('')
+    const [submitting,setSubmitting] = useState(false)  //控制加载效果
+    const [value,setValue] = useState('')   //评论内容
 
 
     useEffect(()=>{
@@ -64,6 +66,11 @@ export default function Articles({match},props){
                 setShow(true)
             }
         })
+        getDiscussListApi(match.params.id).then(res=>{
+            if(res.code === 200){
+                setComments(res.data)
+            }
+        })
 
     },[match])
 
@@ -71,12 +78,36 @@ export default function Articles({match},props){
     //     return time.split('T')[0]
     // }
 
-    const handleSubmit = ()=>{}
+    const handleSubmit = () => {
+       
+        if (value === '') {
+           
+            message.warning('评论内容不能为空！')
+            return
+        }
+        setSubmitting(true)
+        let obj = {
+            userid: JSON.parse(localStorage.getItem('token')).id,
+            username: JSON.parse(localStorage.getItem('token')).name,
+            articleid: match.params.id,
+            content: value
+        }
+    
+        addDiscussApi({...obj}).then(()=>{
+            setSubmitting(false)
+            setComments([...comments,{ 
+                author: 'Han Solo',
+                avatar: 'https://joeschmoe.io/api/v1/random',
+                content: <p>{value}</p>,
+                datetime: moment().fromNow()
+            }])
+            setValue('')
+        })
+
+      };
  
     const handleChange = e => {
-      this.setState({
-        value: e.target.value,
-      });
+      setValue(e.target.value)
     };
 
 

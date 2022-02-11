@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './index.module.scss';
 import { HashRouter as Router,Link } from 'react-router-dom';
+import {SmileOutlined }from '@ant-design/icons';
 
 import life from '../../assets/image/life.png'
 import durk from '../../assets/image/durk.png'
@@ -41,7 +42,7 @@ export default function Head(){
     return (<Router><div>
         <div className={`${styles.head} ${theme==='light'?styles.lbg:styles.dbg}`}>
             <div className={styles.headCont}>
-                <p className={styles.title}>title</p>
+                <p className={styles.title}><SmileOutlined /> Blog Baa</p>
                 <div className={styles.right} onClick={handleClick}>
                     <span></span>
                     <span></span>

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
+import { withRouter } from "react-router-dom";
 import { getArticleInfoApi, addDiscussApi, getDiscussListApi } from "../../server/articles"
-import { Result, Comment, Avatar, Form, Button, List, Input ,Tooltip, message } from 'antd';
+import { Result, Comment, Avatar, Form, Button, List, Input , message, Tag } from 'antd';
 import style from './index.module.scss';
 import ReactMarkdown from 'react-markdown'
+import { RollbackOutlined} from '@ant-design/icons';
 
-// TODO 2.完成图片上传 3.完成评论逻辑 4.展示标签
+// TODO 2.完成图片上传 
 
 import moment from 'moment';
 
@@ -31,36 +33,23 @@ const CommentList = ({ comments }) => (
     </>
   );
 
-export default function Articles({match},props){
+function Articles({match, ...props}){
     const [info, setInfo] = useState({})
     const [errshow, setShow] = useState(false)
     const [comments,setComments] = useState([])
     const [submitting,setSubmitting] = useState(false)  //控制加载效果
     const [value,setValue] = useState('')   //评论内容
+    const [tagList,setTag] = useState([])   //标签列表
+    const [colors] = useState(['magenta','red','volcano','orange','gold','lime','green','cyan','blue','geekblue','purple'])   
 
 
     useEffect(()=>{
-        setComments([{
-            actions: [<span key="comment-list-reply-to-0">Reply to</span>],
-            author: 'Han Solo',
-            avatar: 'https://joeschmoe.io/api/v1/random',
-            content: (
-              <p>
-                We supply a series of design principles, practical patterns and high quality design
-                resources (Sketch and Axure), to help people create their product prototypes beautifully and
-                efficiently.
-              </p>
-            ),
-            datetime: (
-              <Tooltip title={moment().subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss')}>
-                <span>{moment().subtract(1, 'days').fromNow()}</span>
-              </Tooltip>
-            ),
-          }])
 
         getArticleInfoApi(match.params.id).then(res=>{
             if(res.code === 200){
                 setInfo(res.data)
+                let tags = res.data.tag_name_list.split(',')
+                setTag(tags)
             }else{
                 // 出错提示
                 setShow(true)
@@ -110,9 +99,14 @@ export default function Articles({match},props){
       setValue(e.target.value)
     };
 
+    const back = ()=>{
+        props.history.goBack()
+    }
+
 
 
     return ( <div>
+        <p className={style.backBtn} onClick={back} ><RollbackOutlined /></p>
         <div style={{display: errshow?'block':'none'}} >
             <Result
                 status="500"
@@ -124,6 +118,11 @@ export default function Articles({match},props){
             <p className={style.title}>{info.title}</p>
             <p className={style.time}>作者©{info.name}  | </p>
             {/* TODO {filter(info.add_time)} 时间没显示出来，报错 */}
+            <div className={style.tagBox}>
+                {tagList.map((item,index)=>{return(
+                    <Tag key={index} color={colors[index]}>{item}</Tag>
+                )})}
+            </div>
             <hr />
             <div className={style.mdBox}>
                 <ReactMarkdown>{info.md_content}</ReactMarkdown>
@@ -148,3 +147,6 @@ export default function Articles({match},props){
     </div> )
 
 }
+
+
+export default withRouter(Articles)

@@ -1,19 +1,31 @@
 import styles from './index.module.scss';
-import img from '../../assets/image/2021.png'
+import imgmie from '../../assets/image/mie.png'
+import { Space, Image } from 'antd';
+import { SmileTwoTone, HeartTwoTone } from '@ant-design/icons';
 
-export default function Life(){
+export default function About(){
     return(<div>
-        <h2 className={styles.h2}>Technology</h2>
-        <div className={styles.hrBox}> <span></span> <img src={img} alt="" /></div>
-        <div className={styles.cont1}>
-            <div className={styles.contDiv}>
-                <p className={styles.pLeft}> <span className={styles.dot}></span> webpack打包配置文档发发发发发发付付付付付付</p>
-                <p className={styles.pRight}>2020-12-16</p>
+        <div className={styles.box}>
+            <div className={styles.iconBox} style={{fontSize: '20px'}}>
+                <Space>
+                    <HeartTwoTone twoToneColor="#eb2f96" /> &nbsp;
+                    <SmileTwoTone  rotate={-45}/>
+                    <SmileTwoTone twoToneColor="orange" />
+                    <SmileTwoTone twoToneColor="gold" rotate={90}/>
+                    <SmileTwoTone twoToneColor="lime" rotate={180}/>
+                    <SmileTwoTone twoToneColor="cyan" rotate={270}/>
+                    <SmileTwoTone twoToneColor="purple" rotate={45}/> &nbsp;
+                    <HeartTwoTone twoToneColor="#eb2f96"/>
+                </Space>
             </div>
-            <div className={styles.contDiv}>
-                <p className={styles.pLeft}> <span className={styles.dot}></span> webpack打包配置文档</p>
-                <p className={styles.pRight}>2020-12-16</p>
+            <p> <span className={styles.big}> 本</span> 站创建于2020年11月</p>
+            <p>现在已有<span className={styles.big}> 1300 </span>余博客咩~</p>
+            <p>文章数突破 <span className={styles.big}>1w </span>+</p>
+            <div className={styles.imgBox}>
+                
+                    <img className={styles.img} src={imgmie} alt="" />
+        
             </div>
-        </div>
+        </div> 
     </div>)
 }

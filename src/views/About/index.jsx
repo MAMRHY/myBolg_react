@@ -1,9 +1,14 @@
 import styles from './index.module.scss';
 import imgmie from '../../assets/image/mie.png'
-import { Space, Image } from 'antd';
+import { Space } from 'antd';
 import { SmileTwoTone, HeartTwoTone } from '@ant-design/icons';
+import { useEffect } from 'react';
 
 export default function About(){
+
+    // TODO 完成一个接口获取用户数，文章数
+
+
     return(<div>
         <div className={styles.box}>
             <div className={styles.iconBox} style={{fontSize: '20px'}}>

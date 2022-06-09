@@ -9,7 +9,7 @@ export function setToken(token){
 
 
 export function isLogin(){
-    if(localStorage.getItem('token')){
+    if(localStorage.getItem('token').name){
         return true
     }else{
         return false

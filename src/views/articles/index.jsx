@@ -85,7 +85,7 @@ function Articles({match, ...props}){
         addDiscussApi({...obj}).then(()=>{
             setSubmitting(false)
             setComments([...comments,{ 
-                author: 'Han Solo',
+                author: JSON.parse(localStorage.getItem('token')).name,
                 avatar: 'https://joeschmoe.io/api/v1/random',
                 content: <p>{value}</p>,
                 datetime: moment().fromNow()
@@ -131,7 +131,7 @@ function Articles({match, ...props}){
 
             {comments.length > 0 && <CommentList comments={comments} />}
             <Comment
-            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
+            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo1" />}
             content={
                 <Editor
                 onChange={handleChange}
